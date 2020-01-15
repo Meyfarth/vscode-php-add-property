@@ -48,7 +48,7 @@ class AddProperty {
         const selectionLineNumber = editor.selection.active.line;
         const line = document.lineAt(selectionLineNumber);
             
-        if (!line.text.includes('$')) {
+        if (!this.isPropertyLine(line.text)) {
             return;
         }
 
@@ -329,6 +329,10 @@ class AddProperty {
         return parameterText;
     }
 
+    isPropertyLine(textLine) {
+        return /(public|protected|private|static)\s+\$\w+.*;/.test(textLine);
+    }
+
     replaceWithSnippet(text, range) {
         const rangeLines = range.end.line - range.start.line;
 
@@ -419,7 +423,7 @@ class AddProperty {
                 this.lastTraitLine = line;
             }
 
-            if (/(public|protected|private|static)\s+\$\w+.*;/.test(textLine) || /const\s+\w+.*;/.test(textLine)) {
+            if (this.isPropertyLine(textLine) || /const\s+\w+.*;/.test(textLine)) {
                 this.lastPropertyLine = line;
             }
 
