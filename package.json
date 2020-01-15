@@ -41,12 +41,12 @@
 			"commandPalette": [
 				{
 					"command": "phpAddProperty.append",
-					"when": "editorLangId == php"
+					"when": "cursorIsOnPropertyLine"
 			  	}
 			],
 			"editor/context": [
                 {
-                    "when": "resourceLangId == php",
+                    "when": "cursorIsOnPropertyLine",
                     "command": "phpAddProperty.append",
                     "alt": "phpAddProperty.append",
                     "group": "0_phpAddProperty@1"
